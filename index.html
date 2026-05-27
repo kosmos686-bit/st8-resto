@@ -470,11 +470,16 @@ function showSplash(onDone) {
 }
 
 function init() {
-  applyAccent();
-  updateDaysActive();
-  checkBracWarning();
-  checkWeeklyReport();
-  showSplash(showApp);
+   if (!S.raw('st8_api_key')) {
+     document.getElementById('splash').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:var(--text);font-size:1rem">Введите API ключ в настройках</div>';
+     setTimeout(()=>{ switchTab('settings'); }, 1000);
+     return;
+   }
+   applyAccent();
+   updateDaysActive();
+   checkBracWarning();
+   checkWeeklyReport();
+   showSplash(showApp);
 }
 function checkBracWarning(){
   if(!bracList.length) return;
